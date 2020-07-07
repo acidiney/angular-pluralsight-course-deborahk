@@ -20,8 +20,8 @@
         <thead>
           <tr>
             <th>
-              <button (click)="toogleImage" class='btn btn-primary'>
-                Show Image
+              <button (click)="toogleImage()" class='btn btn-primary'>
+                {{ showImage ? 'Hide Images' : 'Show Images' }}
               </button>
             </th>
             <th>Product</th>
