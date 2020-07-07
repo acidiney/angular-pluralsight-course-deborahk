@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit {
     return this._listFilter
   }
 
-  set listFilter (value: string) : void {
+  set listFilter (value: string) {
     this._listFilter = value
 
     this.filteredProducts = this.lisFilter ? this.performFilter(this.lisFilter) : this.products
@@ -49,6 +49,13 @@ export class ProductListComponent implements OnInit {
 
   toogleImage () :void {
     this.showImage = !this.showImage
+  }
+
+  performFilter (filter: string) : IProduct[] {
+    const filterLowercase = filter.toLocaleLowerCase()
+      return this.products.filter((item) => {
+        return item.productName.toLocaleLowerCase().includes(filterLowercase)
+    })
   }
 
   ngOnInit () {
