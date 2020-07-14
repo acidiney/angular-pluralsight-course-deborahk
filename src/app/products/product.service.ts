@@ -1,33 +1,40 @@
 import { Injectable } from '@angular/core'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
+import { Observable, throwError } from 'rxjs'
+import { tap, catchError } from 'rxjs/operators'
+import { IProduct } from './product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  getProductList() {
-    return [
-      {
-        productId: 1,
-        productName: "Leaf Rake",
-        productCode: "GDN-0011",
-        releaseDate: "March 19, 2019",
-        description: "Leaf rake with 48-inch wooden handle.",
-        price: 19.95,
-        starRating: 3.2,
-        imageUrl:
-          "https://images.unsplash.com/photo-1593642634627-6fdaf35209f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-      },
-      {
-        productId: 2,
-        productName: "Garden Cart",
-        productCode: "GDN-0023",
-        releaseDate: "March 18, 2019",
-        description: "15 gallon capacity rolling garden cart",
-        price: 32.99,
-        starRating: 4.2,
-        imageUrl:
-          "https://images.unsplash.com/photo-1593642634627-6fdaf35209f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-      }
-    ];
+  private productUrl = 'api/products/products.json';
+
+  constructor (private _http: HttpClient) {}
+
+  getProductList(): Observable<IProduct[]> {
+    return this._http.get<IProduct[]>(this.productUrl)
+      .pipe(
+        tap(data => console.log(`All: ${ JSON.stringify(data) }`)),
+        catchError(this.handleError)
+      )
+  }
+
+
+  private handleError(err: HttpErrorResponse) {
+    // in a real world app, we may send the server to some remote logging infrastructure
+    // instead of just logging it to the console
+    let errorMessage = '';
+    if (err.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 }
