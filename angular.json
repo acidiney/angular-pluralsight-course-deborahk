@@ -27,9 +27,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-              "https://use.fontawesome.com/4fe1ee4d15.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
