@@ -57,7 +57,9 @@
               {{ product.price | currency: 'AOA' }}
             </td>
             <td>
-              <pm-star [rating]="product.starRating"></pm-star>
+              <pm-star [rating]="product.starRating"
+              (ratingClicked) = "onRatingClicked($event)"
+              ></pm-star>
             </td>
           </tr>
         </tbody>

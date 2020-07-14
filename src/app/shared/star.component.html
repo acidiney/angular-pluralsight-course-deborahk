@@ -1,7 +1,13 @@
 <div class="crop"
      [style.width.px]="starWidth"
-     [title]="rating">
-  <div>
-    <span *ngFor="let star in rating " class="fa fa-star"></span>
+     [title]="rating"
+     (click)="onClick()"
+     >
+  <div style="width: 90px">
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
   </div>
 </div>
