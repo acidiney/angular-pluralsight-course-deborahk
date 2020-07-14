@@ -1,6 +1,6 @@
 .crop {
   /* overflow: hidden; */
-  display: inline
+  display: inline;
 }
 div {
   cursor: pointer;

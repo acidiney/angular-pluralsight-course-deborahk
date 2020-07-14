@@ -12,18 +12,16 @@ export class ProductListComponent implements OnInit {
   imageMargin: number = 2;
   showImage: boolean = false;
 
-  _listFilter: string = 'cart'
-  get lisFilter () : string {
+  _listFilter: string = ''
+  get listFilter () : string {
     return this._listFilter
   }
 
   set listFilter (value: string) {
     this._listFilter = value
 
-    this.filteredProducts = this.lisFilter ? this.performFilter(this.lisFilter) : this.products
+    this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products
   }
-
-  filteredProducts: IProduct[];
 
   products: IProduct[] = [
   {
@@ -47,6 +45,8 @@ export class ProductListComponent implements OnInit {
     "imageUrl": "https://images.unsplash.com/photo-1593642634627-6fdaf35209f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
   }];
 
+  filteredProducts: IProduct[];
+
   toogleImage () :void {
     this.showImage = !this.showImage
   }
@@ -59,6 +59,6 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit () {
-    console.log('In init!');
+    this.filteredProducts = this.products
   }
 }
